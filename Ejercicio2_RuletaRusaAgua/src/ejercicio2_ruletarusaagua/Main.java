@@ -21,7 +21,8 @@ public class Main {
         RevolverAgua revolver = new RevolverAgua();
         Juego ruletaRusaAgua = new Juego();
         
-        cargarJugadores(jugadores, 6);       
+        cargarJugadores(jugadores, 1);     
+        
         ruletaRusaAgua.llenarJuego(jugadores, revolver);
         System.out.println("Inicia el juego !! ");
         Jugador jugadorPerdedor = ruletaRusaAgua.ronda();

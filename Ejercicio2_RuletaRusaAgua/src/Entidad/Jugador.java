@@ -18,11 +18,12 @@ public class Jugador{
     }
     
     public Boolean disparo(RevolverAgua revolver){
+        revolver.girarTambor();
         if(revolver.mojar()){
             mojado = true;
             return true;
         }
-        revolver.siguienteChorro();
+        //revolver.siguienteChorro();
         return false;
     }
 

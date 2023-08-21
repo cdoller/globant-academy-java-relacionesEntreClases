@@ -21,18 +21,18 @@ public class Juego{
     public void llenarJuego(ArrayList<Jugador> jugadores, RevolverAgua revolver){
         this.jugadores = jugadores;
         this.revolver = revolver;
-        revolver.llenarRevolver();
+        revolver.cargarRevolver();
     }
     
     public Jugador ronda(){
-        Scanner disparo = new Scanner(System.in).useDelimiter("\n");
+        Scanner gatillar = new Scanner(System.in).useDelimiter("\n");
         //System.out.println(revolver.toString());
         while(true)
             for (Jugador jugador : jugadores) {
                 System.out.println("--------------------------------");
                 System.out.println("Turno " + jugador.getNombre());
                 System.out.print("DISPARAR >>>>>> ");
-                disparo.next();
+                gatillar.next();
                 if (jugador.disparo(revolver)) {
                     System.out.println("Te mojaste :'( , a dormir la siesta");
                     return jugador;
