@@ -92,8 +92,8 @@ public class ServicioSimulador {
      */
     public void mostrarDetalleVotacion() {
         for (Alumno alumno : alumnos) {
-            System.out.println("Votos recibidos: " + alumno.getCantidadVotos() + " - " + alumno.getNombreCompleto() + ":");
-
+            System.out.println(alumno.getNombreCompleto() + "- Votos recibidos: " + alumno.getCantidadVotos() + ":");
+            System.out.println("Votos realizados:");
             ArrayList<Alumno> listaAlumnosVotados = alumno.getVoto().getListaVotos();
             for (Alumno alumnoVotado : listaAlumnosVotados) {
                 System.out.println(alumnoVotado.getDni().toString() + "-" + alumnoVotado.getNombreCompleto());
@@ -108,12 +108,8 @@ public class ServicioSimulador {
      */
     public void mostrarFacilitadores() {
         for (Alumno alumno : alumnos) {
-            if (alumno.isFacilitadorTitular()) {
-                System.out.println("Titular: " + alumno.getNombreCompleto() + " - " + alumno.getDni());
-            }
-
-            if (alumno.isFacilitadorSuplente()) {
-                System.out.println("Suplente: " + alumno.getNombreCompleto() + " - " + alumno.getDni());
+            if (alumno.isFacilitadorTitular() || alumno.isFacilitadorSuplente()) {
+                System.out.println(alumno);
             }
         }
     }

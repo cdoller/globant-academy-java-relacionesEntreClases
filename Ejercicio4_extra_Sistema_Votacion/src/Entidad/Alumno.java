@@ -87,7 +87,15 @@ public class Alumno {
 
     @Override
     public String toString() {
-        return "Alumno{" + "nombreCompleto=" + nombreCompleto + ", dni=" + dni + '}';
+        String salida = "";
+        if(facilitadorTitular){
+            salida += "Titular: ";
+        }
+        if(facilitadorSuplente){
+            salida += "Suplente: ";
+        }
+        salida += nombreCompleto + "-" + dni + " - (" + cantidadVotos + ")votos";
+        return salida;
     }
 
     @Override
