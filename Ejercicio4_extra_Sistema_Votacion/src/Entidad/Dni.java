@@ -1,5 +1,9 @@
 package Entidad;
 
+/**
+ * Es el dni de una persona, el numero del dni debe ser unico
+ * @author User
+ */
 public class Dni {
 
     private int numero;

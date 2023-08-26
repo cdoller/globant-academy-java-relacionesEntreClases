@@ -2,19 +2,22 @@ package Entidad;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Random;
-import java.util.TreeSet;
 
+/**
+ * Simula una votacion entre alumnos
+ * @author Carlos Oller
+ */
 public class Simulador {
 
     private int cantidadAlumnos;
+    private int votosPorAlumno;
 
-    public Simulador(int cantidadAlumnos) {
+    public Simulador(int cantidadAlumnos, int votosPorAlumno) {
         this.cantidadAlumnos = cantidadAlumnos;
+        this.votosPorAlumno = votosPorAlumno;
     }
 
     public int getCantidadAlumnos() {
@@ -23,8 +26,8 @@ public class Simulador {
 
     /**
      * Genera una lista aleatoria de nombres de longitud cantidadAlumnos
-     *
-     * @return
+     * 
+     * @return la lista de nombres completos aleatoria
      */
     public ArrayList<String> generarListaNombres() {
         Random random = new Random();
@@ -46,8 +49,8 @@ public class Simulador {
     /**
      * Genera un HashSet con dni aleatorios, los cuales deben ser unicos La
      * cantidad de elementos del HashSet debe ser cantidadAlumnos
-     *
-     * @return
+     * 
+     * @return dnis unicos que no se pueden repetir
      */
     public HashSet<Dni> generarListaDni() {
         HashSet<Dni> dnis = new HashSet<>();
@@ -72,10 +75,10 @@ public class Simulador {
 
     /**
      * Genera cantidadAlumnos de Alumnos
-     *
-     * @param nombres
-     * @param dnis
-     * @return
+     * 
+     * @param nombres los nombres aleatorios
+     * @param dnis los dnis aleatorios
+     * @return un listado de Alumnos con un nombre y dni aleatorio
      */
     public ArrayList<Alumno> generarAlumnos(ArrayList<String> nombres, HashSet<Dni> dnis) {
         ArrayList<Alumno> alumnos = new ArrayList<>();
@@ -87,20 +90,7 @@ public class Simulador {
             alumnos.add(new Alumno(nombre, (Dni) it.next()));
             indice++;
         }
-
         return alumnos;
-    }
-
-    /**
-     * Devuelve el listado completo de los alumnos
-     *
-     */
-    public void imprimirAlumnos(ArrayList<Alumno> alumnos) {
-        for (Alumno alumno : alumnos) {
-            System.out.println(alumno.getNombreCompleto());
-            System.out.println(alumno.getDni().toString());
-            System.out.println("-------------");
-        }
     }
 
     /**
@@ -109,18 +99,17 @@ public class Simulador {
      * uno a la cantidad de votos a cada alumno que reciba un voto Tener en
      * cuenta que un alumno no puede votarse a sí mismo o votar más de una vez
      * al mismo alumno.
-     *
+     * 
      * @param alumnos
      */
     public void votacion(ArrayList<Alumno> alumnos) {
         Random random = new Random();
-        HashSet<Alumno> alumnosHash = new HashSet<>();
+        HashSet<Alumno> alumnosElegidos = new HashSet<>();
 
         for (Alumno alumno : alumnos) {
             Voto voto = new Voto();
-            HashSet<Alumno> alumnosElegidos = new HashSet<>();
-            // generamos votos
-            while (alumnosElegidos.size() != 3) {
+            
+            while (alumnosElegidos.size() != votosPorAlumno) {
                 int indiceAleatorio = random.nextInt(alumnos.size());
                 Alumno alumnoAleatorio = alumnos.get(indiceAleatorio);
 
@@ -131,50 +120,11 @@ public class Simulador {
                 alumnosElegidos.add(alumnoAleatorio);
                 alumnoAleatorio.sumarVoto();
             }
+            
             voto.setListaVotos(new ArrayList<>(alumnosElegidos));
             alumno.setVoto(voto);
             alumno.setHaVotado(true);
+            alumnosElegidos.clear();
         }
-    }
-
-    /**
-     * Se debe crear un método que muestre a cada Alumno con su cantidad de
-     * votos y cuales fueron sus 3 votos.
-     *
-     * @param alumnos
-     */
-    public void mostrarDetalleVotacion(ArrayList<Alumno> alumnos) {
-        for (Alumno alumno : alumnos) {
-            System.out.println("Votos recibidos: " + alumno.getCantidadVotos() + " - " + alumno.getNombreCompleto() + ":");
-
-            ArrayList<Alumno> listaAlumnosVotados = alumno.getVoto().getListaVotos();
-            for (Alumno alumnoVotado : listaAlumnosVotados) {
-                System.out.println(alumnoVotado.getDni().toString() + "-" + alumnoVotado.getNombreCompleto());
-            }
-            System.out.println("------------");
-        }
-    }
-
-    /**
-     * Se debe crear un método que haga el recuento de votos, este recibe la
-     * lista de Alumnos y comienza a hacer el recuento de votos.
-     *
-     * @param alumnos
-     * @return el resultado de la votacion, un TreeMap con el listado de alumnos
-     * ordenados por votos recibidos
-     */
-    public TreeSet<Alumno> recuentoVotos(ArrayList<Alumno> alumnos) {
-        TreeSet<Alumno> resultadoVotacion = new TreeSet<>((a1, a2) -> {
-            int comparacionPorVotos = Integer.compare(a2.getCantidadVotos(), a1.getCantidadVotos());
-            if (comparacionPorVotos != 0) {
-                // Si la cantidad de votos es diferente, usa esa comparación
-                return comparacionPorVotos;
-            } else {
-                // Si la cantidad de votos es la misma, usa el nombre como desempate
-                return Integer.compare(a2.getDni().getNumero(), a1.getDni().getNumero());
-            }
-        });
-        resultadoVotacion.addAll(alumnos);
-        return resultadoVotacion;
     }
 }

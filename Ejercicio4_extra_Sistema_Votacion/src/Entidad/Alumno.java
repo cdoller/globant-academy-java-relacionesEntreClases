@@ -3,6 +3,10 @@ package Entidad;
 import java.util.Comparator;
 import java.util.Objects;
 
+/**
+ * Simula un alumno que puede votar, recibir votos y ser facilitador
+ * @author User
+ */
 public class Alumno {
 
     private String nombreCompleto;
@@ -10,6 +14,8 @@ public class Alumno {
     private int cantidadVotos;
     private Voto voto;
     private boolean haVotado;
+    private boolean facilitadorTitular;
+    private boolean facilitadorSuplente;
 
     /**
      *
@@ -21,6 +27,8 @@ public class Alumno {
         this.dni = dni;
         cantidadVotos = 0;
         haVotado = false;
+        facilitadorTitular = false;
+        facilitadorSuplente = false;
     }
 
     public String getNombreCompleto() {
@@ -50,6 +58,25 @@ public class Alumno {
     public void setHaVotado(boolean haVotado) {
         this.haVotado = haVotado;
     }
+
+    public boolean isFacilitadorTitular() {
+        return facilitadorTitular;
+    }
+
+    public void setFacilitadorTitular(boolean facilitadorTitular) {
+        this.facilitadorTitular = facilitadorTitular;
+    }
+
+    public boolean isFacilitadorSuplente() {
+        return facilitadorSuplente;
+    }
+
+    public void setFacilitadorSuplente(boolean facilitadorSuplente) {
+        this.facilitadorSuplente = facilitadorSuplente;
+    }
+
+    
+    
 
     /**
      * Suma un voto a cantidad de votos
@@ -89,6 +116,12 @@ public class Alumno {
         }
         return true;
     }
-    
+
+    public static Comparator<Alumno> compararVotos = new Comparator<Alumno>() {
+        @Override
+        public int compare(Alumno a1, Alumno a2) {
+            return Integer.compare(a1.getCantidadVotos(), a2.getCantidadVotos());
+        }
+    };
 
 }

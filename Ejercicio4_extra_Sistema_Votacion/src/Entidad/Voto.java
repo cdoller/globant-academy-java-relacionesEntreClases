@@ -2,6 +2,10 @@ package Entidad;
 
 import java.util.ArrayList;
 
+/**
+ * Es el voto emitido, almacena la lista de los elementos votados
+ * @author User
+ */
 public class Voto {
 
     private ArrayList<Alumno> listaVotos;
