@@ -20,7 +20,6 @@ public class ServicioCine {
     Cine cine;
     ArrayList<Espectador> espectadores;
     ArrayList<Espectador> espectadoresRechazados;
-    ArrayList<Pelicula> peliculas;
 
     /**
      * Creamos un servicio cine, pero no iniciamos la simulacion
@@ -28,7 +27,6 @@ public class ServicioCine {
     public ServicioCine() {
         espectadores = new ArrayList<>();
         espectadoresRechazados = new ArrayList<>();
-        peliculas = new ArrayList<>();
     }
 
     /**
@@ -56,13 +54,13 @@ public class ServicioCine {
         int numeroSala = 1, maximoFilas = 0, maximoColumnas = 0;
         double precioEntrada = 0.0;
         ArrayList<Sala> salas = new ArrayList<>();
-        for (int i = 0; i < peliculas.size(); i++) {
+        for (int i = 0; i < cine.getPeliculas().size(); i++) {
             numeroSala = i + 1;
             maximoFilas = (int) (Math.random() * 11 + 5);
             maximoColumnas = (int) (Math.random() * 5 + 6);
             precioEntrada = numeroSala * 100.0;
-            Collections.shuffle(peliculas);
-            pelicula = peliculas.get(i);
+            Collections.shuffle(cine.getPeliculas());
+            pelicula = cine.getPeliculas().get(i);
             salas.add(new Sala("Sala", numeroSala, maximoFilas, maximoColumnas, precioEntrada, pelicula));
         }
         cine.setSalas(salas);
@@ -73,18 +71,18 @@ public class ServicioCine {
      * informacion adicional
      */
     public void crearPeliculas() {
-        peliculas.add(new Pelicula("Gran Turismo: De jugador a corredor", 134, "Neill Blomkamp", 13));
-        peliculas.add(new Pelicula("Tortugas Ninja: Caos mutante", 100, "Jeff Rowe, Kyler Spears", 0));
-        peliculas.add(new Pelicula("Asteroid City", 104, "Wes Anderson", 13));
-        peliculas.add(new Pelicula("Oppenheimer", 180, "Christopher Nolan", 13));
-        peliculas.add(new Pelicula("Barbie", 114, "Greta Gerwig", 0));
+        cine.agregarPelicula(new Pelicula("Gran Turismo: De jugador a corredor", 134, "Neill Blomkamp", 13));
+        cine.agregarPelicula(new Pelicula("Tortugas Ninja: Caos mutante", 100, "Jeff Rowe, Kyler Spears", 0));
+        cine.agregarPelicula(new Pelicula("Asteroid City", 104, "Wes Anderson", 13));
+        cine.agregarPelicula(new Pelicula("Oppenheimer", 180, "Christopher Nolan", 13));
+        cine.agregarPelicula(new Pelicula("Barbie", 114, "Greta Gerwig", 0));
     }
 
     /**
      * Imprime el listado completo de las peliculas
      */
     public void imprimirPeliculas() {
-        for (Pelicula pelicula : peliculas) {
+        for (Pelicula pelicula : cine.getPeliculas()) {
             System.out.println(pelicula.toString());
             System.out.println("------------------------------------------------------");
         }

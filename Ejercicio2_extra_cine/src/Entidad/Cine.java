@@ -29,6 +29,10 @@ public class Cine {
     public void setPeliculas(ArrayList<Pelicula> peliculas) {
         this.peliculas = peliculas;
     }
+    
+    public void agregarPelicula(Pelicula pelicula){
+        peliculas.add(pelicula);
+    }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
