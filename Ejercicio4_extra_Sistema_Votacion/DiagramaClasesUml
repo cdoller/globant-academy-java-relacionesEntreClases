@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Ejercicio4_extra_Sistema_Votacion">
+  <ClassDiagramComponents>
+    <Class name="Alumno" package="Entidad" visibility="public" xPosition="441.0" yPosition="14.0">
+      <Fields>
+        <Field name="nombreCompleto" type="String" visibility="private"/>
+        <Field name="dni" type="Dni" visibility="private"/>
+        <Field name="cantidadVotos" type="int" visibility="private"/>
+        <Field name="voto" type="Voto" visibility="private"/>
+        <Field name="haVotado" type="boolean" visibility="private"/>
+        <Field name="facilitadorTitular" type="boolean" visibility="private"/>
+        <Field name="facilitadorSuplente" type="boolean" visibility="private"/>
+        <Field name="compararVotos" type="Comparator&lt;Alumno&gt;" visibility="public" isStatic="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="nombreCompleto"/>
+          <Argument type="Dni" name="dni"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getNombreCompleto" returnType="String" visibility="public"/>
+        <Method name="getDni" returnType="Dni" visibility="public"/>
+        <Method name="getCantidadVotos" returnType="int" visibility="public"/>
+        <Method name="getVoto" returnType="Voto" visibility="public"/>
+        <Method name="isHaVotado" returnType="boolean" visibility="public"/>
+        <Method name="setVoto" returnType="void" visibility="public">
+          <Argument type="Voto" name="voto"/>
+        </Method>
+        <Method name="setHaVotado" returnType="void" visibility="public">
+          <Argument type="boolean" name="haVotado"/>
+        </Method>
+        <Method name="isFacilitadorTitular" returnType="boolean" visibility="public"/>
+        <Method name="setFacilitadorTitular" returnType="void" visibility="public">
+          <Argument type="boolean" name="facilitadorTitular"/>
+        </Method>
+        <Method name="isFacilitadorSuplente" returnType="boolean" visibility="public"/>
+        <Method name="setFacilitadorSuplente" returnType="void" visibility="public">
+          <Argument type="boolean" name="facilitadorSuplente"/>
+        </Method>
+        <Method name="sumarVoto" returnType="void" visibility="public"/>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Dni" package="Entidad" visibility="public" xPosition="102.0" yPosition="109.0">
+      <Fields>
+        <Field name="numero" type="int" visibility="private"/>
+        <Field name="tipo" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="numero"/>
+          <Argument type="String" name="tipo"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getNumero" returnType="int" visibility="public"/>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Simulador" package="Entidad" visibility="public" xPosition="827.0" yPosition="568.0">
+      <Fields>
+        <Field name="cantidadAlumnos" type="int" visibility="private"/>
+        <Field name="votosPorAlumno" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="cantidadAlumnos"/>
+          <Argument type="int" name="votosPorAlumno"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getCantidadAlumnos" returnType="int" visibility="public"/>
+        <Method name="generarListaNombres" returnType="ArrayList&lt;String&gt;" visibility="public"/>
+        <Method name="generarListaDni" returnType="HashSet&lt;Dni&gt;" visibility="public"/>
+        <Method name="generarAlumnos" returnType="ArrayList&lt;Alumno&gt;" visibility="public">
+          <Argument type="ArrayList&lt;String&gt;" name="nombres"/>
+          <Argument type="HashSet&lt;Dni&gt;" name="dnis"/>
+        </Method>
+        <Method name="votacion" returnType="void" visibility="public">
+          <Argument type="ArrayList&lt;Alumno&gt;" name="alumnos"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Voto" package="Entidad" visibility="public" xPosition="62.0" yPosition="553.0">
+      <Fields>
+        <Field name="listaVotos" type="ArrayList&lt;Alumno&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getListaVotos" returnType="ArrayList&lt;Alumno&gt;" visibility="public"/>
+        <Method name="setListaVotos" returnType="void" visibility="public">
+          <Argument type="ArrayList&lt;Alumno&gt;" name="listaVotos"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="ServicioSimulador" package="Servicio" visibility="public" xPosition="874.0" yPosition="14.0">
+      <Fields>
+        <Field name="alumnos" type="ArrayList&lt;Alumno&gt;" visibility="private"/>
+        <Field name="simulacion" type="Simulador" visibility="private"/>
+        <Field name="cantidadAlumnos" type="int" visibility="private"/>
+        <Field name="cantidadFacilitadores" type="int" visibility="private"/>
+        <Field name="votosPorAlumno" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="cantidadAlumnos"/>
+          <Argument type="int" name="cantidadFacilitadores"/>
+          <Argument type="int" name="votosPorAlumno"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getAlumnos" returnType="ArrayList&lt;Alumno&gt;" visibility="public"/>
+        <Method name="getCantidadAlumnos" returnType="int" visibility="public"/>
+        <Method name="getCantidadFacilitadores" returnType="int" visibility="public"/>
+        <Method name="getVotosPorAlumno" returnType="int" visibility="public"/>
+        <Method name="arrancarSimulacion" returnType="void" visibility="public"/>
+        <Method name="setearFacilitadores" returnType="void" visibility="public"/>
+        <Method name="imprimirAlumnos" returnType="void" visibility="public"/>
+        <Method name="mostrarResultadoVotacion" returnType="void" visibility="public"/>
+        <Method name="mostrarDetalleVotacion" returnType="void" visibility="public"/>
+        <Method name="mostrarFacilitadores" returnType="void" visibility="public"/>
+        <Method name="contarVotosTotales" returnType="int" visibility="public"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="alumnos" source="Servicio.ServicioSimulador" target="Entidad.Alumno" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Alumno&gt;"/>
+    <HasRelation name="listaVotos" source="Entidad.Voto" target="Entidad.Alumno" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Alumno&gt;"/>
+    <HasRelation name="compararVotos" source="Entidad.Alumno" target="Entidad.Alumno" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="voto" source="Entidad.Alumno" target="Entidad.Voto" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="dni" source="Entidad.Alumno" target="Entidad.Dni" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="simulacion" source="Servicio.ServicioSimulador" target="Entidad.Simulador" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
